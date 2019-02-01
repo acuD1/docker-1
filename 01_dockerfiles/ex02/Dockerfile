@@ -2,9 +2,9 @@
 # $ git clone https://github.com/acuD1/rails-docker-1.git
 # $ docker build -t ft-rails:on-build .
 ## Then run :
-# $ mkdir ex02 && echo -e "FROM ft-rails:on-build\nEXPOSE 3000\nCMD ["rails", "s", "-b", "0.0.0.0", "-p" ,"3000"]" > ex02/Dockerfile
+# $ mkdir Dockerfile_Subject && echo -e 'FROM ft-rails:on-build\nEXPOSE 3000\nCMD ["rails", "s", "-b", "0.0.0.0", "-p" ,"3000"]' > Dockerfile_Subject/Dockerfile
 ## Then run subject build:
-# $ docker build -t ex02 ex02/
+# $ docker build -t ex02 Dockerfile_Subject/
 # $ docker run -it -p 3000:3000 --rm ex02
 FROM ruby:2.5.1
 
