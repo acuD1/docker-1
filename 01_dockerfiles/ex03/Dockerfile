@@ -31,4 +31,4 @@ RUN echo "gitlab_rails['gitlab_shell_ssh_port'] = 2222" >> /etc/gitlab/gitlab.rb
 ENTRYPOINT service ssh start && (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && gitlab-ctl tail
 
 # When git clone or git push with HTTPS add 'GIT_SSL_NO_VERIFY=true' at the begining of each commands like '$ GIT_SSL_NO_VERIFY=true git push'
-# When git clone with https://* in directory do '$ git config http.emptyAuth true' to avoid HTTP error
+# When git push with https://* in directory do '$ git config http.emptyAuth true' to avoid HTTP error if you get one
