@@ -1,4 +1,7 @@
-# VM optimisation : docker-machine create --driver virtualbox --virtualbox-memory "4096" --virtualbox-cpu-count "2" Char]
+# VM optimisation : docker-machine create --driver virtualbox --virtualbox-memory "4096" --virtualbox-cpu-count "2" Char
+# Build image : docker build -t ex03 .
+# Run container : docker run --name gitlab-ce -it -p 80:80 -p 2222:22 -p 443:443 --privileged ex03
+
 FROM debian
 WORKDIR /
 
@@ -23,8 +26,9 @@ RUN echo "external_url \"https://192.168.99.100\"" >> /etc/gitlab/gitlab.rb
 RUN echo "nginx['redirect_http_to_https'] = true" >> /etc/gitlab/gitlab.rb
 RUN echo "nginx['ssl_certificate'] = \"/etc/gitlab/ssl/selfsigned.crt\"" >> /etc/gitlab/gitlab.rb
 RUN echo "nginx['ssl_certificate_key'] = \"/etc/gitlab/ssl/selfsigned.key\"" >> /etc/gitlab/gitlab.rb
+RUN echo "gitlab_rails['gitlab_shell_ssh_port'] = 2222" >> /etc/gitlab/gitlab.rb
 
-ENTRYPOINT service ssh start && (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && bash
+ENTRYPOINT service ssh start && (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && gitlab-ctl tail
 
 # When git clone or git push with HTTPS add 'GIT_SSL_NO_VERIFY=true' at the begining of each commands like '$ GIT_SSL_NO_VERIFY=true git push'
 # When git clone with https://* in directory do '$ git config http.emptyAuth true' to avoid HTTP error
