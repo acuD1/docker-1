@@ -1,6 +1,6 @@
 # Make sure to have TS3 client version 3.2.3
 # docker build -t ts3-image .
-# docker run -it --name ts3 -p 9987:9987/udp -p 10011:10011 -p 30033:30033 --rmi ts3-image
+# docker run -it --name ts3 -p 9987:9987/udp -p 10011:10011 -p 30033:30033 --rm ts3-image
 
 FROM debian:latest
 

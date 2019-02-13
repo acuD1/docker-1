@@ -1,5 +1,5 @@
 # docker build -t ex00 .
-# docker run -it --rm vim
+# docker run -it --rm ex00
 
 FROM alpine
 RUN apk update && apk upgrade

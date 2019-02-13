@@ -1,1 +1,2 @@
+# docker-machine ssh Aiur "<>"
 docker swarm join --token <token previously created from Char> 192.168.99.100:2377
