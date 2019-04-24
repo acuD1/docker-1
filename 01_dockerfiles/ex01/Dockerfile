@@ -11,6 +11,7 @@ ENV TS3SERVER_LICENSE=accept
 ### Initialisation
 RUN apt-get update
 RUN apt-get install wget=1.18-5+deb9u3 bzip2=1.0.6-8.1 -y
+RUN rm -rf /var/lib/apt/lists/*
 
 ### Config
 RUN wget http://dl.4players.de/ts/releases/${VERSION}/teamspeak3-server_linux_amd64-${VERSION}.tar.bz2
