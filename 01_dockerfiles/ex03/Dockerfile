@@ -2,18 +2,19 @@
 # Build image : docker build -t ex03 .
 # Run container : docker run --name gitlab-ce -it -p 80:80 -p 2222:22 -p 443:443 --privileged ex03
 
-FROM debian
+FROM debian:9.8
 WORKDIR /
 
 # Initialisation
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y curl openssh-server ca-certificates postfix
+RUN apt-get update
+RUN apt-get install -y curl=7.52.1-5+deb9u9 openssh-server=1:7.4p1-10+deb9u6 ca-certificates=20161130+nmu1+deb9u1 postfix=3.1.9-0+deb9u2
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN echo 'root:qwerty' | chpasswd
 
 # Gitlab-CE installation
 RUN curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | bash
-RUN apt-get install gitlab-ce
+RUN apt-get install -y gitlab-ce
+RUN rm -rf /var/lib/apt/lists/*
 
 # Configure HTTPS
 RUN mkdir -p /etc/gitlab/ssl
